@@ -6,7 +6,7 @@
 module sram_scan_wrapper ( scan_clk, scan_rst_n, scan_in, scan_out );
 
 parameter N_addr = 32;  //number of bits in addr
-parameter N_cnt = 31;  // bits reserved for storing count for subsequent addresses + 1 bit specifying read/write
+parameter N_cnt = 32;  // bits reserved for storing count for subsequent addresses + 1 bit specifying read/write
 
 parameter N_data = 32;   //number of bits in data bus
 parameter N_clk = 16;   //half the number of bits in data bus
@@ -88,8 +88,10 @@ end
 always @(negedge clk_div) begin
     if (!rst_n_sync)
         data_in_reg <= 'd0;
-    else
+    else begin
         data_in_reg <= data_scan_reg;
+        $display($time, " [SC_IMEM] Scanned %h into addr %h", data_scan_reg, addr);
+    end
 end
 
 reg load_addr_d, load_addr_d1;

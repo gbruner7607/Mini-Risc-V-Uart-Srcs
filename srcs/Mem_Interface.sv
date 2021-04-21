@@ -4,13 +4,13 @@ module Mem_Interface #(
     parameter N_cnt=32,  // Number of bits for storing number of subsequent addresses + 1 bit for specifying read/write
     parameter N_data=32, // Number of bits in data bus/word
     parameter N_clk=16,  // Half the number of bits in data bus (for clk divider)
-    parameter data_sep='h2000   // Address where instr mem ends and data begins 
+    parameter data_sep='h2000   // Address where instr mem ends and data begins
     ) (
     // Regular RISC-V Interaction
-	input logic clk, imem_en, mem_en, 
+	input logic clk, imem_en, mem_en,
 	input logic [2:0] storecntrl_a, storecntrl_b,
-	input logic [31:0] imem_addr, imem_din, mem_addr, mem_din, 
-	input logic [3:0] imem_wen, mem_wen, 
+	input logic [31:0] imem_addr, imem_din, mem_addr, mem_din,
+	input logic [3:0] imem_wen, mem_wen,
 	output logic [N_data-1:0] imem_dout, mem_dout,
 	// Scanchain Interaction
 	input logic scan_en, scan_clk, scan_in, // scan_en acts as a reset for scanchain state when low
@@ -23,15 +23,15 @@ logic [29:0] addra0, addra1, addra2, addra3;
 logic [29:0] addrb0_rv, addrb1_rv, addrb2_rv, addrb3_rv;
 logic [29:0] addrb0, addrb1, addrb2, addrb3;
 
-logic [3:0] ena_rv, enb_rv, wea_rv, web_rv; 
-logic [3:0] ena, enb, wea, web; 
+logic [3:0] ena_rv, enb_rv, wea_rv, web_rv;
+logic [3:0] ena, enb, wea, web;
 logic mem_clk;
 
 logic [7:0] dina0_rv, dina1_rv, dina2_rv, dina3_rv;
 logic [7:0] dina0, dina1, dina2, dina3;
 logic [7:0] dinb0_rv, dinb1_rv, dinb2_rv, dinb3_rv;
 logic [7:0] dinb0, dinb1, dinb2, dinb3;
-logic [7:0] douta0, douta1, douta2, douta3; 
+logic [7:0] douta0, douta1, douta2, douta3;
 logic [7:0] doutb0, doutb1, doutb2, doutb3;
 logic [N_data-1:0] imem_dout_buf, mem_dout_buf;
 
@@ -49,7 +49,7 @@ imem_cell_2 icell2(.clka(mem_clk), .addra(addra2), .dina(dina2),
 	.douta(douta2), .ena(ena[2]), .wea(wea[2]));
 imem_cell_3 icell3(.clka(mem_clk), .addra(addra3), .dina(dina3),
 	.douta(douta3), .ena(ena[3]), .wea(wea[3]));
-	
+
 //sram_compiled_array icell0(
 //    .addr0(addra0[0]), .addr1(addra0[1]), .addr2(addra0[2]), .addr3(addra0[3]),
 //    .addr4(addra0[4]), .addr5(addra0[5]), .addr6(addra0[6]), .addr7(addra0[7]),
@@ -157,7 +157,7 @@ always_comb begin
 				2'b00: wea_rv = 4'b0001;
 				2'b01: wea_rv = 4'b0010;
 				2'b10: wea_rv = 4'b0100;
-				2'b11: wea_rv = 4'b1000; 
+				2'b11: wea_rv = 4'b1000;
 			endcase
 		end
 		3'b010: begin // store halfword
@@ -165,11 +165,11 @@ always_comb begin
 				2'b00: wea_rv = 4'b0011;
 				2'b01: wea_rv = 4'b0110;
 				2'b10: wea_rv = 4'b1100;
-				2'b11: wea_rv = 4'b1001; 
+				2'b11: wea_rv = 4'b1001;
 			endcase
 		end
 		3'b100: wea_rv = 4'b1111;
-		default: wea_rv = 4'b0000; 
+		default: wea_rv = 4'b0000;
 	endcase
 
     case(last_imem_addr)
@@ -191,18 +191,18 @@ always_comb begin
 			dina1_rv = imem_din[15:8];
 			dina2_rv = imem_din[23:16];
 			dina3_rv = imem_din[31:24];
-			
+
 		end
 		2'b01: begin
 			addra0_rv = imem_addr[31:2] + 1;
 			addra1_rv = imem_addr[31:2];
 			addra2_rv = imem_addr[31:2];
-			addra3_rv = imem_addr[31:2]; 
+			addra3_rv = imem_addr[31:2];
 			dina1_rv = imem_din[7:0];
 			dina2_rv = imem_din[15:8];
 			dina3_rv = imem_din[23:16];
 			dina0_rv = imem_din[31:24];
-			
+
 		end
 		2'b10: begin
 			addra0_rv = imem_addr[31:2] + 1;
@@ -213,7 +213,7 @@ always_comb begin
 			dina3_rv = imem_din[15:8];
 			dina0_rv = imem_din[23:16];
 			dina1_rv = imem_din[31:24];
-			
+
 		end
 		2'b11: begin
 			addra0_rv = imem_addr[31:2] + 1;
@@ -224,7 +224,7 @@ always_comb begin
 			dina0_rv = imem_din[15:8];
 			dina1_rv = imem_din[23:16];
 			dina2_rv = imem_din[31:24];
-			
+
 		end
 	endcase
 
@@ -234,7 +234,7 @@ always_comb begin
 				2'b00: web_rv = 4'b0001;
 				2'b01: web_rv = 4'b0010;
 				2'b10: web_rv = 4'b0100;
-				2'b11: web_rv = 4'b1000; 
+				2'b11: web_rv = 4'b1000;
 			endcase
 		end
 		3'b010: begin // store halfword
@@ -242,13 +242,13 @@ always_comb begin
 				2'b00: web_rv = 4'b0011;
 				2'b01: web_rv = 4'b0110;
 				2'b10: web_rv = 4'b1100;
-				2'b11: web_rv = 4'b1001; 
+				2'b11: web_rv = 4'b1001;
 			endcase
 		end
 		3'b100: web_rv = 4'b1111;
-		default: web_rv = 4'b0000; 
+		default: web_rv = 4'b0000;
 	endcase
-	
+
 	case(last_mem_addr)
 	   2'b00: mem_dout_buf = {doutb3, doutb2, doutb1, doutb0};
 	   2'b01: mem_dout_buf = {doutb0, doutb3, doutb2, doutb1};
@@ -267,18 +267,18 @@ always_comb begin
 			dinb1_rv = mem_din[15:8];
 			dinb2_rv = mem_din[23:16];
 			dinb3_rv = mem_din[31:24];
-			
+
 		end
 		2'b01: begin
 			addrb0_rv = mem_addr[31:2] + 1;
 			addrb1_rv = mem_addr[31:2];
 			addrb2_rv = mem_addr[31:2];
-			addrb3_rv = mem_addr[31:2]; 
+			addrb3_rv = mem_addr[31:2];
 			dinb1_rv = mem_din[7:0];
 			dinb2_rv = mem_din[15:8];
 			dinb3_rv = mem_din[23:16];
 			dinb0_rv = mem_din[31:24];
-			
+
 		end
 		2'b10: begin
 			addrb0_rv = mem_addr[31:2] + 1;
@@ -289,7 +289,7 @@ always_comb begin
 			dinb3_rv = mem_din[15:8];
 			dinb0_rv = mem_din[23:16];
 			dinb1_rv = mem_din[31:24];
-			
+
 		end
 		2'b11: begin
 			addrb0_rv = mem_addr[31:2] + 1;
@@ -300,7 +300,7 @@ always_comb begin
 			dinb0_rv = mem_din[15:8];
 			dinb1_rv = mem_din[23:16];
 			dinb2_rv = mem_din[31:24];
-			
+
 		end
 	endcase
 
@@ -368,12 +368,12 @@ end
 //scan_clk divide logic
 always @(posedge scan_clk) begin
     if (!rst_n_sync) clk_count <= 'd0;
-    else if (clk_count == N_clk-1) clk_count <= 'd0;
+    else if (clk_count == N_data-1) clk_count <= 'd0;
     else clk_count <= clk_count + 1;
 end
 always @(posedge scan_clk) begin
     if (!rst_n_sync) clk_div <= 'd0;
-    if(clk_count == N_clk-1) clk_div <= ~clk_div;
+    if ((clk_count == N_clk-1) || (clk_count == N_data-1)) clk_div <= ~clk_div;
 end
 
 //Load data_in load register to drive SRAM inputs
@@ -386,49 +386,59 @@ always @(negedge clk_div) begin
     end
 end
 
-
+reg load_addr_d, load_addr_d1;
+wire load_addr = load_addr_d ^ load_addr_d1;
 //addr_counter count value
-always@(posedge scan_select) begin
-    addr_counter <= addr_cnt_reg[N_cnt-1:1];
+always@(posedge clk_1) begin
+    if(!rst_n_sync)
+        load_addr_d <= 'b0;
+    else
+        load_addr_d <= scan_select;
+end
+
+always@(posedge clk_1) begin
+    load_addr_d1 <= load_addr_d;
 end
 
 //Addr generator from addr_cnt_reg
-always @(negedge clk_div) begin
+always @(posedge clk_div or negedge rst_n_sync) begin
     if(!rst_n_sync) begin
         addr <= 'd0;
         we_sc <= 'b0;
         en_sc <= 'b1;
         addr_counter <= 'd0;
-    end else if(scan_select)begin
-        addr[N_addr-1:0] = addr_cnt_reg[N_addr+N_cnt-1:N_cnt] + (addr_cnt_reg[N_cnt-1:0] - addr_counter[N_cnt-1:0]);
-        addr_counter = addr_counter -1;
-        we_sc = addr_cnt_reg[0];
-        en_sc = addr_cnt_reg[0];
-    end
-end
-
-//data out load register
-always @(posedge clk_div) begin
-    if(!rst_n_sync)
-        data_out_reg <= 'd0;
-    else if (scan_select & !en_sc)
-        data_out_reg <= addr_sc < data_sep ? imem_dout_buf : mem_dout_buf;
-end
-
-//Scan out data output register
-always @(posedge clk_1) begin
-    if(!rst_n_sync) begin
-        scan_out <= 'b0;
-        data_out_reg <= 'd0;
-    end else begin
-        scan_out <= rst_n_sync & data_out_reg[0];
-        data_out_reg[N_data-1:0] <= {data_out_reg[0], data_out_reg[N_data-1:1]};
+    end else if(scan_select) begin
+		if (clk_count == N_clk-1) begin
+            addr[N_addr-1:0] <= addr_cnt_reg[N_addr+N_cnt-1:N_cnt] + (addr_cnt_reg[N_cnt-1:0] - addr_counter[N_cnt-1:0]);
+            addr_counter <= addr_counter - 1;
+            we_sc <= addr_cnt_reg[0];
+            en_sc <= addr_cnt_reg[0];
+        end else if (load_addr) begin
+            addr <= addr;
+            we_sc <= we_sc;
+            en_sc <= en_sc;
+            addr_counter <= addr_cnt_reg[N_cnt-1:1];
+        end
     end
 end
 
 wire clk_w = clk_div;
 wire [N_addr-1:0] addr_sc = addr[N_addr-1:0];
 wire [N_data-1:0] din_sc = data_in_reg[N_data-1:0];
+
+//Scan out data output register
+always @(posedge clk_1) begin
+    if(!rst_n_sync) begin
+        scan_out <= 'b0;
+        data_out_reg <= 'd0;
+    end else if (clk_count == N_clk -1) begin
+        scan_out <= scan_out;
+        data_out_reg <= addr_sc < data_sep ? imem_dout_buf : mem_dout_buf;
+    end else begin
+        scan_out <= rst_n_sync & data_out_reg[0];
+        data_out_reg[N_data-1:0] <= {data_out_reg[0], data_out_reg[N_data-1:1]};
+    end
+end
 
 
 
@@ -456,7 +466,7 @@ always_comb begin
     dinb3  = dinb3_rv;
     enb = enb_rv;
     web = web_rv;
-    
+
     mem_clk = clk;
     if (scan_en == 1) begin
         if (addr_sc < data_sep) begin

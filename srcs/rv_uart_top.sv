@@ -159,7 +159,6 @@ module rv_uart_top(
     
     //FPGA Debugging
     input  logic debug,
-    input  logic addr_dn, addr_up,
     input  logic [4:0] debug_input,
     output logic [7:0] sev_out,
     output logic [7:0] an,
@@ -187,7 +186,7 @@ module rv_uart_top(
     logic [3:0]  seg_cur, seg_nxt;
     logic        clk_50M, clk_5M;
     logic clk_7seg;
-//    logic addr_dn, addr_up;
+    logic addr_dn, addr_up;
     logic [95:0] key;
     logic clk_rv;
     assign clk_rv = clk_50M;
