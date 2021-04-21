@@ -49,14 +49,7 @@ module Multiplier
 
   always @(posedge clk or posedge rst)
   begin
-    if (rdy) // Stage 3: Wait 2 clock cycles.
-    begin
-      if (count)
-        count <= 0;
-      else
-        rdy <= 0;
-    end
-    else if (rst || !mul_op) // Reset
+    if (rst) // Reset
     begin
       factor_a  <= 32'b0;
       factor_b  <= 32'b0;
@@ -65,6 +58,23 @@ module Multiplier
       rdy       <= 1'b0;
       busy      <= 1'b0;
       full_res  <= 32'h0;
+    end else begin
+    if (!mul_op) // Reset
+    begin
+      factor_a  <= 32'b0;
+      factor_b  <= 32'b0;
+      high_bits <= 1'b0;
+      count     <= 1'b0;
+      rdy       <= 1'b0;
+      busy      <= 1'b0;
+      full_res  <= 32'h0;
+    end
+    else if (rdy) // Stage 3: Wait 2 clock cycles.
+    begin
+      if (count)
+        count <= 0;
+      else
+        rdy <= 0;
     end
     else if (busy) // Stage 2: Calculate multiplication.
     begin
@@ -80,6 +90,7 @@ module Multiplier
       high_bits <= ~mul;
       busy      <= 1'b1;
     end
+		end
   end
 
   assign ready = rdy;

@@ -351,7 +351,7 @@ STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .G
     integer maxcnt = 100000000;
     always_ff @(posedge clk) begin
         if (Rst) begin
-            cnt = 0;
+            cnt <= 0;
         end else if (~(debug || prog)) begin
             if (cnt == maxcnt) begin
                 cnt <= 0;
