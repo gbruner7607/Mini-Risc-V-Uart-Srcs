@@ -166,8 +166,8 @@ end
 
 
 Mem_Interface sharedmem(.clk(clk), .imem_en(imem_en), .mem_en((blkmem_wr | blkmem_rd) & (~mmio_region)), 
-    .storecntrl_a(3'b000), .storecntrl_b(blkmem_strctrl), .imem_addr(imem_addr), .imem_din(scan_in_word), .mem_addr(blkmem_addr - 'h2000), 
-    .mem_din(blkmem_din), .imem_wen(scan_in_wen), .mem_wen(blkmem_en), .imem_dout(imem_dout), .mem_dout(doutb),
+    .storecntrl_a(3'b000), .storecntrl_b(blkmem_strctrl), .imem_addr(imem_addr), .imem_din(32'hz), .mem_addr(blkmem_addr - 'h2000), 
+    .mem_din(blkmem_din), .imem_wen(4'b0000), .mem_wen(blkmem_en), .imem_dout(imem_dout), .mem_dout(doutb),
     .scan_en(rbus.scan_en), .scan_clk(rbus.scan_clk), .scan_in(rbus.scan_in), .scan_out(rbus.scan_out)
     );
 
