@@ -158,21 +158,21 @@ module rv_uart_top(
     output logic clk_out,
     
     //FPGA Debugging
-    input  logic debug,
-    input  logic [4:0] debug_input,
-    output logic [6:0] sev_out,
-    output logic [7:0] an,
-    output logic [15:0] led,
+//    input  logic debug,
+//    input  logic [4:0] debug_input,
+//    output logic [6:0] sev_out,
+//    output logic [7:0] an,
+//    output logic [15:0] led,
     
     //UART
     input  logic rx,
     output logic tx,
     
     //Scanchain (disable for FPGA testing)
-//    input  logic scan_en,
-//    input  logic scan_in,
-//    input  logic scan_clk,
-//    output logic scan_out,
+    input  logic scan_en,
+    input  logic scan_in,
+    input  logic scan_clk,
+    output logic scan_out,
     
     //SPI
     input  logic miso,
@@ -190,19 +190,19 @@ module rv_uart_top(
     assign clk_rv = clk_50M;
     
     // Comment out for FPGA testing
-//	logic [4:0] debug_input;
-//	logic debug;
-//	assign debug = 0;
-//	assign debug_input = 5'b00000;
+	logic [4:0] debug_input;
+	logic debug;
+	assign debug = 0;
+	assign debug_input = 5'b00000;
 
     // Include for FPGA testing
-    logic scan_en;
-    logic scan_in;
-    logic scan_clk;
-    logic scan_out;
-    assign scan_en = 0;
-    assign scan_in = 0;
-    assign scan_clk = 0;
+//    logic scan_en;
+//    logic scan_in;
+//    logic scan_clk;
+//    logic scan_out;
+//    assign scan_en = 0;
+//    assign scan_in = 0;
+//    assign scan_clk = 0;
 
     // Debug Output Driving
     assign led = {12'h0, rbus.stack_mismatch, mbus.RAS_ena, rbus.trapping, rbus.uart_IRQ};
