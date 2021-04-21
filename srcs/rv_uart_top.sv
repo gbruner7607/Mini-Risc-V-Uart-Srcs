@@ -194,6 +194,9 @@ module rv_uart_top(
 	logic debug;
 	assign debug = 0;
 	assign debug_input = 5'b00000;
+	logic [6:0] sev_out;
+	logic [7:0] an;
+	logic [15:0] led;
 
     // Include for FPGA testing
 //    logic scan_en;
