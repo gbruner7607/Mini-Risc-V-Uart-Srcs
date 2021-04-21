@@ -154,7 +154,7 @@ endinterface
 
 module rv_uart_top(
     input  logic clk,
-    input  logic Rst,
+    input  logic rst_n,
     output logic clk_out,
     
     //FPGA Debugging
@@ -188,6 +188,7 @@ module rv_uart_top(
     logic [95:0] key;
     logic clk_rv;
     assign clk_rv = clk_50M;
+    logic Rst;
     
     // Comment out for FPGA testing
 	logic [4:0] debug_input;
@@ -197,6 +198,7 @@ module rv_uart_top(
 	logic [6:0] sev_out;
 	logic [7:0] an;
 	logic [15:0] led;
+    assign Rst = !rst_n;
 
     // Include for FPGA testing
 //    logic scan_en;
@@ -206,6 +208,7 @@ module rv_uart_top(
 //    assign scan_en = 0;
 //    assign scan_in = 0;
 //    assign scan_clk = 0;
+//    assign Rst = rst_n;
 
     // Debug Output Driving
     assign led = {12'h0, rbus.stack_mismatch, mbus.RAS_ena, rbus.trapping, rbus.uart_IRQ};
