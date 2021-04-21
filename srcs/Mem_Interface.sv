@@ -50,7 +50,7 @@ logic [29:0] wraparound_a, wraparound_b;
 //imem_cell_3 icell3(.clka(mem_clk), .addra(addra3), .dina(dina3),
 //	.douta(douta3), .ena(ena[3]), .wea(wea[3]));
 
-sram_compiled_array icell0(
+sram_compiled_array_2kb icell0(
     .addr0(addra0[0]), .addr1(addra0[1]), .addr2(addra0[2]), .addr3(addra0[3]),
     .addr4(addra0[4]), .addr5(addra0[5]), .addr6(addra0[6]), .addr7(addra0[7]),
     .addr8(addra0[8]), .addr9(addra0[9]), .addr10(addra0[10]),
@@ -60,7 +60,7 @@ sram_compiled_array icell0(
     .dout4(douta0[4]), .dout5(douta0[5]), .dout6(douta0[6]), .dout7(douta0[7]),
     .clk(clk), .write_en(imem_wen[0]), .sense_en(!(clk & ena[0])));
 
-sram_compiled_array icell1(
+sram_compiled_array_2kb icell1(
     .addr0(addra1[0]), .addr1(addra1[1]), .addr2(addra1[2]), .addr3(addra1[3]),
     .addr4(addra1[4]), .addr5(addra1[5]), .addr6(addra1[6]), .addr7(addra1[7]),
     .addr8(addra1[8]), .addr9(addra1[9]), .addr10(addra1[10]),
@@ -70,7 +70,7 @@ sram_compiled_array icell1(
     .dout4(douta1[4]), .dout5(douta1[5]), .dout6(douta1[6]), .dout7(douta1[7]),
     .clk(clk), .write_en(imem_wen[1]), .sense_en(!(clk & ena[1])));
 
-sram_compiled_array icell2(
+sram_compiled_array_2kb icell2(
     .addr0(addra2[0]), .addr1(addra2[1]), .addr2(addra2[2]), .addr3(addra2[3]),
     .addr4(addra2[4]), .addr5(addra2[5]), .addr6(addra2[6]), .addr7(addra2[7]),
     .addr8(addra2[8]), .addr9(addra2[9]), .addr10(addra2[10]),
@@ -80,7 +80,7 @@ sram_compiled_array icell2(
     .dout4(douta2[4]), .dout5(douta2[5]), .dout6(douta2[6]), .dout7(douta2[7]),
     .clk(clk), .write_en(imem_wen[2]), .sense_en(!(clk & ena[2])));
 
-sram_compiled_array icell3(
+sram_compiled_array_2kb icell3(
     .addr0(addra3[0]), .addr1(addra3[1]), .addr2(addra3[2]), .addr3(addra3[3]),
     .addr4(addra3[4]), .addr5(addra3[5]), .addr6(addra3[6]), .addr7(addra3[7]),
     .addr8(addra3[8]), .addr9(addra3[9]), .addr10(addra3[10]),
@@ -100,7 +100,7 @@ sram_compiled_array icell3(
 //mem_cell_3 cell3(.clka(mem_clk), .addra(addrb3), .dina(dinb3),
 //	.douta(doutb3), .ena(enb[3]), .wea(web[3]));
 
-sram_compiled_array cell0(
+sram_compiled_array_2kb cell0(
     .addr0(addrb0[0]), .addr1(addrb0[1]), .addr2(addrb0[2]), .addr3(addrb0[3]),
     .addr4(addrb0[4]), .addr5(addrb0[5]), .addr6(addrb0[6]), .addr7(addrb0[7]),
     .addr8(addrb0[8]), .addr9(addrb0[9]), .addr10(addrb0[10]),
@@ -110,7 +110,7 @@ sram_compiled_array cell0(
     .dout4(doutb0[4]), .dout5(doutb0[5]), .dout6(doutb0[6]), .dout7(doutb0[7]),
     .clk(clk), .write_en(mem_wen[0]), .sense_en(!(clk & enb[0])));
 
-sram_compiled_array cell1(
+sram_compiled_array_2kb cell1(
     .addr0(addrb1[0]), .addr1(addrb1[1]), .addr2(addrb1[2]), .addr3(addrb1[3]),
     .addr4(addrb1[4]), .addr5(addrb1[5]), .addr6(addrb1[6]), .addr7(addrb1[7]),
     .addr8(addrb1[8]), .addr9(addrb1[9]), .addr10(addrb1[10]),
@@ -120,7 +120,7 @@ sram_compiled_array cell1(
     .dout4(doutb1[4]), .dout5(doutb1[5]), .dout6(doutb1[6]), .dout7(doutb1[7]),
     .clk(clk), .write_en(mem_wen[1]), .sense_en(!(clk & enb[1])));
 
-sram_compiled_array cell2(
+sram_compiled_array_2kb cell2(
     .addr0(addrb2[0]), .addr1(addrb2[1]), .addr2(addrb2[2]), .addr3(addrb2[3]),
     .addr4(addrb2[4]), .addr5(addrb2[5]), .addr6(addrb2[6]), .addr7(addrb2[7]),
     .addr8(addrb2[8]), .addr9(addrb2[9]), .addr10(addrb2[10]),
@@ -130,7 +130,7 @@ sram_compiled_array cell2(
     .dout4(doutb2[4]), .dout5(doutb2[5]), .dout6(doutb2[6]), .dout7(doutb2[7]),
     .clk(clk), .write_en(mem_wen[2]), .sense_en(!(clk & enb[2])));
 
-sram_compiled_array cell3(
+sram_compiled_array_2kb cell3(
     .addr0(addrb3[0]), .addr1(addrb3[1]), .addr2(addrb3[2]), .addr3(addrb3[3]),
     .addr4(addrb3[4]), .addr5(addrb3[5]), .addr6(addrb3[6]), .addr7(addrb3[7]),
     .addr8(addrb3[8]), .addr9(addrb3[9]), .addr10(addrb3[10]),
