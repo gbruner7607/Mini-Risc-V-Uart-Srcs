@@ -28,7 +28,7 @@ initial begin
     
     // Number of addresses to write (addr_count)
     //scan_bits(11'b1111_1111_1111_1111, 11);
-    scan_bits(32'hFFFF_FFFF, 31);
+    scan_bits(32'hFFFF_FFFF, 32);
     
     // Initial address to begin writing at (address)
     //scan_bits(11'b000_0000_0000, 11);
@@ -50,7 +50,7 @@ initial begin
     scan_bits(1'b0, 1);
     
     // Number of addresses to read (addr_count)
-    scan_bits(32'hFFFF_FFFF, 31);
+    scan_bits(32'hFFFF_FFFF, 32);
     
     // Address to start reading at (address)
     scan_bits(32'h0000_0000, 32);

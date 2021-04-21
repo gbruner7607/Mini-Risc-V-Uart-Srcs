@@ -1,7 +1,7 @@
 module Mem_Interface #(
     // Scanchain Parameters
-    parameter N_addr=31, // Number of bits in address
-    parameter N_cnt=32,  // Number of bits for storing number of subsequent addresses + 1 bit for specifying read/write
+    parameter N_addr=32, // Number of bits in address
+    parameter N_cnt=33,  // Number of bits for storing number of subsequent addresses + 1 bit for specifying read/write
     parameter N_data=32, // Number of bits in data bus/word
     parameter N_clk=16,  // Half the number of bits in data bus (for clk divider)
     parameter data_sep='h2000   // Address where instr mem ends and data begins
@@ -369,7 +369,7 @@ end
 always @(posedge scan_clk) begin
     if (!rst_n_sync) clk_count <= 'd0;
     else if (clk_count == N_data-1) clk_count <= 'd0;
-    else clk_count <= clk_count + 1;
+    else if (scan_select) clk_count <= clk_count + 1;
 end
 always @(posedge scan_clk) begin
     if (!rst_n_sync) clk_div <= 'd0;
@@ -401,14 +401,14 @@ always@(posedge clk_1) begin
 end
 
 //Addr generator from addr_cnt_reg
-always @(posedge clk_div or negedge rst_n_sync) begin
+always @(posedge clk_1) begin
     if(!rst_n_sync) begin
         addr <= 'd0;
         we_sc <= 'b0;
         en_sc <= 'b1;
         addr_counter <= 'd0;
     end else if(scan_select) begin
-		if (clk_count == N_clk-1) begin
+        if (clk_count == N_data-1) begin
             addr[N_addr-1:0] <= addr_cnt_reg[N_addr+N_cnt-1:N_cnt] + (addr_cnt_reg[N_cnt-1:0] - addr_counter[N_cnt-1:0]);
             addr_counter <= addr_counter - 1;
             we_sc <= addr_cnt_reg[0];
@@ -432,7 +432,7 @@ always @(posedge clk_1) begin
         scan_out <= 'b0;
         data_out_reg <= 'd0;
     end else if (clk_count == N_clk -1) begin
-        scan_out <= scan_out;
+        scan_out <= rst_n_sync & data_out_reg[0];
         data_out_reg <= addr_sc < data_sep ? imem_dout_buf : mem_dout_buf;
     end else begin
         scan_out <= rst_n_sync & data_out_reg[0];

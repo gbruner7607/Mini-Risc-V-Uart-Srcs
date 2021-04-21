@@ -12,27 +12,31 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="8130001fs"></ZoomEndTime>
-      <Cursor1Time time="5400000fs"></Cursor1Time>
+      <ZoomEndTime time="6925881fs"></ZoomEndTime>
+      <Cursor1Time time="283149fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="192"></NameColumnWidth>
-      <ValueColumnWidth column_width="82"></ValueColumnWidth>
+      <ValueColumnWidth column_width="72"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="16" />
-   <wvobject fp_name="/tb_sram_scan/clk" type="logic">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <WVObjectSize size="34" />
+   <wave_markers>
+      <marker time="260000" label="" />
+      <marker time="420000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_clk" type="logic">
+      <obj_property name="ElementShortName">scan_clk</obj_property>
+      <obj_property name="ObjectShortName">scan_clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_sram_scan/rst_n" type="logic">
-      <obj_property name="ElementShortName">rst_n</obj_property>
-      <obj_property name="ObjectShortName">rst_n</obj_property>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_rst_n" type="logic">
+      <obj_property name="ElementShortName">scan_rst_n</obj_property>
+      <obj_property name="ObjectShortName">scan_rst_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_sram_scan/scan_in" type="logic">
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_in" type="logic">
       <obj_property name="ElementShortName">scan_in</obj_property>
       <obj_property name="ObjectShortName">scan_in</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_sram_scan/scan_out" type="logic">
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_out" type="logic">
       <obj_property name="ElementShortName">scan_out</obj_property>
       <obj_property name="ObjectShortName">scan_out</obj_property>
    </wvobject>
@@ -45,8 +49,8 @@
       <obj_property name="ObjectShortName">sense_en</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr_cnt_reg" type="array">
-      <obj_property name="ElementShortName">addr_cnt_reg[42:0]</obj_property>
-      <obj_property name="ObjectShortName">addr_cnt_reg[42:0]</obj_property>
+      <obj_property name="ElementShortName">addr_cnt_reg[62:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_cnt_reg[62:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/data_scan_reg" type="array">
       <obj_property name="ElementShortName">data_scan_reg[31:0]</obj_property>
@@ -65,16 +69,20 @@
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr" type="array">
-      <obj_property name="ElementShortName">addr[10:0]</obj_property>
-      <obj_property name="ObjectShortName">addr[10:0]</obj_property>
+      <obj_property name="ElementShortName">addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr_w" type="array">
-      <obj_property name="ElementShortName">addr_w[10:0]</obj_property>
-      <obj_property name="ObjectShortName">addr_w[10:0]</obj_property>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr_cnt_pointer" type="array">
+      <obj_property name="ElementShortName">addr_cnt_pointer[31:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_cnt_pointer[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/din_w" type="array">
-      <obj_property name="ElementShortName">din_w[31:0]</obj_property>
-      <obj_property name="ObjectShortName">din_w[31:0]</obj_property>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/rst_n_sync" type="logic">
+      <obj_property name="ElementShortName">rst_n_sync</obj_property>
+      <obj_property name="ObjectShortName">rst_n_sync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_in_sync" type="logic">
+      <obj_property name="ElementShortName">scan_in_sync</obj_property>
+      <obj_property name="ObjectShortName">scan_in_sync</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/clk_count" type="array">
       <obj_property name="ElementShortName">clk_count[31:0]</obj_property>
@@ -83,5 +91,73 @@
    <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/clk_div" type="logic">
       <obj_property name="ElementShortName">clk_div</obj_property>
       <obj_property name="ObjectShortName">clk_div</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr_counter" type="array">
+      <obj_property name="ElementShortName">addr_counter[30:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_counter[30:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/clk_1" type="logic">
+      <obj_property name="ElementShortName">clk_1</obj_property>
+      <obj_property name="ObjectShortName">clk_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/scan_select" type="logic">
+      <obj_property name="ElementShortName">scan_select</obj_property>
+      <obj_property name="ObjectShortName">scan_select</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/demux_out_addr" type="logic">
+      <obj_property name="ElementShortName">demux_out_addr</obj_property>
+      <obj_property name="ObjectShortName">demux_out_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/demux_out_data" type="logic">
+      <obj_property name="ElementShortName">demux_out_data</obj_property>
+      <obj_property name="ObjectShortName">demux_out_data</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/load_addr_d" type="logic">
+      <obj_property name="ElementShortName">load_addr_d</obj_property>
+      <obj_property name="ObjectShortName">load_addr_d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/load_addr_d1" type="logic">
+      <obj_property name="ElementShortName">load_addr_d1</obj_property>
+      <obj_property name="ObjectShortName">load_addr_d1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/load_addr" type="logic">
+      <obj_property name="ElementShortName">load_addr</obj_property>
+      <obj_property name="ObjectShortName">load_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/clk_w" type="logic">
+      <obj_property name="ElementShortName">clk_w</obj_property>
+      <obj_property name="ObjectShortName">clk_w</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/write_en_w" type="logic">
+      <obj_property name="ElementShortName">write_en_w</obj_property>
+      <obj_property name="ObjectShortName">write_en_w</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/sense_en_w" type="logic">
+      <obj_property name="ElementShortName">sense_en_w</obj_property>
+      <obj_property name="ObjectShortName">sense_en_w</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/addr_w" type="array">
+      <obj_property name="ElementShortName">addr_w[31:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_w[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/din_w" type="array">
+      <obj_property name="ElementShortName">din_w[31:0]</obj_property>
+      <obj_property name="ObjectShortName">din_w[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/N_addr" type="array">
+      <obj_property name="ElementShortName">N_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">N_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/N_cnt" type="array">
+      <obj_property name="ElementShortName">N_cnt[31:0]</obj_property>
+      <obj_property name="ObjectShortName">N_cnt[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/N_data" type="array">
+      <obj_property name="ElementShortName">N_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">N_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_sram_scan/SRAM_wrapper_inst/N_clk" type="array">
+      <obj_property name="ElementShortName">N_clk[31:0]</obj_property>
+      <obj_property name="ObjectShortName">N_clk[31:0]</obj_property>
    </wvobject>
 </wave_config>

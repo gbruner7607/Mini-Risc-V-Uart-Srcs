@@ -6,7 +6,7 @@
 module sram_scan_wrapper ( scan_clk, scan_rst_n, scan_in, scan_out );
 
 parameter N_addr = 32;  //number of bits in addr
-parameter N_cnt = 32;  // bits reserved for storing count for subsequent addresses + 1 bit specifying read/write
+parameter N_cnt = 33;  // bits reserved for storing count for subsequent addresses + 1 bit specifying read/write
 
 parameter N_data = 32;   //number of bits in data bus
 parameter N_clk = 16;   //half the number of bits in data bus
