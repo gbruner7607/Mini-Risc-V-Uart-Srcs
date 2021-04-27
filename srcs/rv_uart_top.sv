@@ -250,7 +250,7 @@ STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .G
 
     riscv_bus rbus(.clk(clk_rv), .*);
     mmio_bus mbus(
-        .clk(clk_50M), .Rst(Rst), .rx(rx),
+        .clk(clk_50M), .Rst(Rst), .rx(rx), .tx(tx),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
