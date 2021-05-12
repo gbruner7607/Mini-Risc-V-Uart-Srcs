@@ -239,7 +239,7 @@ module rv_uart_top(
 	assign prog = scan_en;
 
 
-STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .GTS(0), .KEYCLEARB(0), .PACK(0), .USRCCLKO(spi_sck), .USRCCLKTS(0), .USRDONEO(0), .USRDONETS(0));
+//STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .GTS(0), .KEYCLEARB(0), .PACK(0), .USRCCLKO(spi_sck), .USRCCLKTS(0), .USRDONEO(0), .USRDONETS(0));
 
 //`ifndef SYNTHESIS
 
@@ -251,6 +251,7 @@ STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .G
     riscv_bus rbus(.clk(clk_rv), .*);
     mmio_bus mbus(
         .clk(clk_50M), .Rst(Rst), .rx(rx),
+	.tx(tx), .BR_clk(clk),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
@@ -265,7 +266,7 @@ STARTUPE2 startup_i(.CFGCLK(), .CFGMCLK(), .EOS(), .PREQ(), .CLK(0), .GSR(0), .G
 
     Debug_Display d0(mbus.display);
 
-    uart_controller u0(mbus.uart, rbus.uart);
+    (* dont_touch = "true" *) uart_controller u0(mbus.uart, rbus.uart);
 
     spi_controller spi0(mbus.spi);
 
