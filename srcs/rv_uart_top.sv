@@ -156,24 +156,24 @@ module rv_uart_top(
     input  logic clk,
     input  logic rst_n,
     output logic clk_out,
-    
+
     //FPGA Debugging
 //    input  logic debug,
 //    input  logic [4:0] debug_input,
 //    output logic [6:0] sev_out,
 //    output logic [7:0] an,
 //    output logic [15:0] led,
-    
+
     //UART
     input  logic rx,
     output logic tx,
-    
+
     //Scanchain (disable for FPGA testing)
     input  logic scan_en,
     input  logic scan_in,
     input  logic scan_clk,
     output logic scan_out,
-    
+
     //SPI
     input  logic miso,
     output logic mosi, cs
@@ -189,7 +189,7 @@ module rv_uart_top(
     logic clk_rv;
     assign clk_rv = clk_50M;
     logic Rst;
-    
+
     // Comment out for FPGA testing
 	logic [4:0] debug_input;
 	logic debug;
@@ -234,7 +234,7 @@ module rv_uart_top(
 	assign spi_miso = miso;
 	assign mosi = spi_mosi;
 	assign cs = spi_cs;
-    
+
     //Scanchain
 	assign prog = scan_en;
 
@@ -259,7 +259,7 @@ module rv_uart_top(
 	clk_div cdiv2(clk_50M,Rst,16'd5,clk_5M); // 50 MHz -> 5 MHz
 	// Removed the Rst signal here since some of the RISC-V resets
 	//   are synchronous to the clock, and so would never reset
-	
+
     RISCVcore_uart rv_core(rbus.core);
 
     Memory_Controller memcon0(rbus.memcon, mbus.memcon);
