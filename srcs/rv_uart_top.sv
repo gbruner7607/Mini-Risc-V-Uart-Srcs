@@ -155,7 +155,6 @@ endinterface
 module rv_uart_top(
     input  logic clk,
     input  logic rst_n,
-    output logic clk_out,
 
     //FPGA Debugging
 //    input  logic debug,
@@ -176,18 +175,17 @@ module rv_uart_top(
 
     //SPI
     input  logic miso,
-    output logic mosi, cs
+    output logic mosi, cs,
+    output logic spi_clk
 );
 
 	logic prog;
     logic [31:0] debug_output;
     logic [3:0]  seg_cur, seg_nxt;
-    logic        clk_50M, clk_5M;
+    logic        clk_50M, clk_12M, clk_115k;
     logic clk_7seg;
     logic addr_dn, addr_up;
     logic [95:0] key;
-    logic clk_rv;
-    assign clk_rv = clk_50M;
     logic Rst;
 
     // Comment out for FPGA testing
@@ -218,9 +216,8 @@ module rv_uart_top(
                       a4=8'b11101111, a5=8'b11011111,
                       a6=8'b10111111, a7=8'b01111111}
                       an_cur, an_nxt;
-	clk_div cdiv(clk,Rst,16'd500,clk_7seg);
+	clk_div cdiv_7seg(clk,Rst,16'd500,clk_7seg);
     assign an = an_cur;
-    assign clk_out = clk_50M;
 
 
     assign key[95:48]=48'h3cf3cf3cf3cf;
@@ -234,6 +231,7 @@ module rv_uart_top(
 	assign spi_miso = miso;
 	assign mosi = spi_mosi;
 	assign cs = spi_cs;
+	assign spi_clk = clk_12M;
 
     //Scanchain
 	assign prog = scan_en;
@@ -248,15 +246,16 @@ module rv_uart_top(
 //	clk_50M = 0;
 //end
 
-    riscv_bus rbus(.clk(clk_rv), .*);
+    riscv_bus rbus(.clk(clk_50M), .*);
     mmio_bus mbus(
-        .clk(clk_50M), .Rst(Rst), .rx(rx),
-	.tx(tx), .BR_clk(clk),
+        .clk(clk_12M), .Rst(Rst), .rx(rx),
+        .tx(tx), .BR_clk(clk_115k),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
-	clk_div cdiv1(clk,Rst,16'd1,clk_50M); // 100 MHz -> 50 MHz
-	clk_div cdiv2(clk_50M,Rst,16'd5,clk_5M); // 50 MHz -> 5 MHz
+	clk_div   #(2) cdiv50M (clk,Rst,clk_50M);  // 100 MHz -> 50 MHz
+	clk_div   #(8) cdiv12M (clk,Rst,clk_12M);  // 100 MHz -> 12.5 MHz
+	clk_div #(868) cdiv115k(clk,Rst,clk_115k); // 100 MHz -> 115200 kHz
 	// Removed the Rst signal here since some of the RISC-V resets
 	//   are synchronous to the clock, and so would never reset
 
@@ -275,7 +274,6 @@ module rv_uart_top(
     counter cnt0(mbus.counter);
 
   //clk_wiz_0 clk_div0(clk_50M, clk);
-  //clk_wiz_1 clk_div1(clk_5M, clk_50M);
 
    always_ff @(posedge clk_7seg) begin
      if (Rst) begin
