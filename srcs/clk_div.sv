@@ -29,16 +29,16 @@ module clk_div #(
     
     logic clk_sig;
     logic [15:0] cnt;
-    always_ff @(edge clk_in)
+    always_ff @(posedge clk_in)
     begin
         if (rst)
         begin
-            cnt = DIVISOR-1;
+            cnt = DIVISOR/2-1;
             clk_sig = 0;
         end
         
         else begin // Input clock edge
-            if (cnt == DIVISOR-1) begin
+            if (cnt >= DIVISOR/2-1) begin
                 cnt = 0;
                 clk_sig = ~clk_sig;
             end
