@@ -253,9 +253,10 @@ module rv_uart_top(
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
-	clk_div   #(2) cdiv50M (clk,Rst,clk_50M);  // 100 MHz -> 50 MHz
-	clk_div   #(8) cdiv12M (clk,Rst,clk_12M);  // 100 MHz -> 12.5 MHz
-	clk_div #(868) cdiv115k(clk,Rst,clk_115k); // 100 MHz -> 115200 kHz
+	//clk_div   #(2) cdiv50M (clk,Rst,clk_50M);  // 100 MHz -> 50 MHz
+	assign clk_50M = clk;
+	clk_div   #(4) cdiv12M (clk,Rst,clk_12M);  // 50 MHz -> 12.5 MHz
+	clk_div #(434) cdiv115k(clk,Rst,clk_115k); // 50 MHz -> 115200 kHz
 	// Removed the Rst signal here since some of the RISC-V resets
 	//   are synchronous to the clock, and so would never reset
 
