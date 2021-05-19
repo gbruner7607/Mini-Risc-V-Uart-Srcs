@@ -1,9 +1,9 @@
 # Based off https://www.xilinx.com/support/answers/62488.html
 
 ## Input Clocks
-# Master Clock (100MHz, 50ns)
-create_clock -period 50.000 -name clk_master \
-    -waveform {0.000 25.000} -add [get_ports clk]
+# Master Clock (50MHz, 20ns)
+create_clock -period 20.000 -name clk_master \
+    -waveform {0.000 10.000} -add [get_ports clk]
 # Scan-chain Clock (1MHz, 1000ns)
 create_clock -period 1000.000 -name clk_scanchain \
     -waveform {0.000 500.000} -add [get_ports scan_clk]

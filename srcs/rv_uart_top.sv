@@ -266,7 +266,7 @@ module rv_uart_top(
 
     Debug_Display d0(mbus.display);
 
-    (* dont_touch = "true" *) uart_controller u0(mbus.uart, rbus.uart);
+    uart_controller u0(mbus.uart, rbus.uart);
 
     spi_controller spi0(mbus.spi);
 
