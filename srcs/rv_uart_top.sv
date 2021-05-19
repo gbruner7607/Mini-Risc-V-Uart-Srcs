@@ -216,7 +216,7 @@ module rv_uart_top(
                       a4=8'b11101111, a5=8'b11011111,
                       a6=8'b10111111, a7=8'b01111111}
                       an_cur, an_nxt;
-	clk_div #(50000000) cdiv_7seg(clk,clk_7seg);
+	clk_div #(50000000) cdiv_7seg(clk,Rst,clk_7seg);
     assign an = an_cur;
 
 
