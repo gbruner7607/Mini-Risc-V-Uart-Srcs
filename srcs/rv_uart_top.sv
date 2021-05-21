@@ -182,7 +182,7 @@ module rv_uart_top(
 	logic prog;
     logic [31:0] debug_output;
     logic [3:0]  seg_cur, seg_nxt;
-    logic        clk_50M, clk_12M, clk_115k;
+    logic        clk_rv, clk_spi, clk_uart;
     logic clk_7seg;
     logic addr_dn, addr_up;
     logic [95:0] key;
@@ -231,7 +231,7 @@ module rv_uart_top(
 	assign spi_miso = miso;
 	assign mosi = spi_mosi;
 	assign cs = spi_cs;
-	assign spi_clk = clk_12M;
+	assign spi_clk = clk_spi;
 
     //Scanchain
 	assign prog = scan_en;
@@ -243,20 +243,19 @@ module rv_uart_top(
 
 // clk_wiz_0 c0(.*);
 //initial begin
-//	clk_50M = 0;
+//	clk_rv = 0;
 //end
 
-    riscv_bus rbus(.clk(clk_50M), .*);
+    riscv_bus rbus(.clk(clk_rv), .*);
     mmio_bus mbus(
-        .clk(clk_12M), .Rst(Rst), .rx(rx),
-        .tx(tx), .BR_clk(clk_115k),
+        .clk(clk_spi), .Rst(Rst), .rx(rx),
+        .tx(tx), .BR_clk(clk_uart),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
-	//clk_div   #(2) cdiv50M (clk,Rst,clk_50M);  // 100 MHz -> 50 MHz
-	assign clk_50M = clk;
-	clk_div   #(4) cdiv12M (clk,Rst,clk_12M);  // 50 MHz -> 12.5 MHz
-	clk_div #(434) cdiv115k(clk,Rst,clk_115k); // 50 MHz -> 115200 kHz
+	assign clk_rv = clk;
+	clk_div   #(2) cdiv_spi (clk,Rst,clk_spi);  // 25 MHz -> 12.5 MHz
+	clk_div #(217) cdiv_uart(clk,Rst,clk_uart); // 25 MHz -> 115200 kHz
 	// Removed the Rst signal here since some of the RISC-V resets
 	//   are synchronous to the clock, and so would never reset
 
@@ -274,7 +273,7 @@ module rv_uart_top(
 
     counter cnt0(mbus.counter);
 
-  //clk_wiz_0 clk_div0(clk_50M, clk);
+  //clk_wiz_0 clk_div0(clk_rv, clk);
 
    always_ff @(posedge clk_7seg) begin
      if (Rst) begin
