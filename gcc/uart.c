@@ -1,4 +1,5 @@
 #include "uart.h"
+#include "utils.h"
 
 #define INT_OFFSET 48
 

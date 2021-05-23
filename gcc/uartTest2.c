@@ -1,33 +1,29 @@
-#include"uart.h"
-#include"utils.h"
-
-int nothing()
-{
-    return 1;
-}
+#include "uart.h"
+#include "print.h"
+#include "utils.h"
 
 int main(void)
 {
-    char str[20];
-	char num_str[10];
+	uart_init();
+
     int i = 0;
-    int num = 298;
-	int size = count_digits(num);
+    int sum = 0;
+	char numchar[12];
 
-	itoa(num, str);
-	itoa(size, num_str);
-
-	uart_write_blocking(num_str[0]);
-	uart_write_blocking(str[0]);
-	uart_write_blocking(str[1]);
-	uart_write_blocking(str[2]);
-
-    while(i < size)
+    for(i = 0; i < 10; i++)
     {
-        uart_write_blocking(str[i]);
-        i++;
+        sum++;
     }
 
-    while (1)
-        ;
+    for(i = 0; i < 2; i++)
+    {
+        sum--;
+    }
+
+    print(sum);
+
+	itoa(sum, numchar);
+	uart_print(numchar);
+
+	return 0;
 }
