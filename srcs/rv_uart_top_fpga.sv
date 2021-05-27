@@ -206,7 +206,7 @@ module rv_uart_top(
     assign scan_en = 0;
     assign scan_in = 0;
     assign scan_clk = 0;
-    assign Rst = rst_n;
+    assign Rst = !rst_n;
 
     // Debug Output Driving
     assign led = {12'h0, rbus.stack_mismatch, mbus.RAS_ena, rbus.trapping, rbus.uart_IRQ};
