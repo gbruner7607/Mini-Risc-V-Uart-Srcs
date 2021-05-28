@@ -4,8 +4,7 @@ interface riscv_bus (
     input  logic clk, Rst, debug, prog,
     input  logic scan_en, scan_in, scan_clk,
     output logic scan_out,
-    input  logic [4:0] debug_input,
-    input  logic [95:0] key
+    input  logic [4:0] debug_input
     );
 
     //Memory signals
@@ -42,7 +41,7 @@ interface riscv_bus (
         input clk, Rst, debug, prog, debug_input, mem_dout, imem_dout, //rx,
         output debug_output, mem_wea, mem_rea, mem_en, mem_addr, mem_din, imem_en,
         output imem_addr, imem_din, imem_prog_ena, storecntrl,
-        input key, input mem_hold, uart_IRQ,
+        input mem_hold, uart_IRQ,
         output trapping,
         output IF_ID_pres_addr, ins, IF_ID_dout_rs1, branch, IF_ID_jal, IF_ID_rd, branoff, next_addr,
         input stack_mismatch, RAS_rdy, RAS_branch, ret
@@ -185,8 +184,8 @@ module rv_uart_top(
     logic        clk_rv, clk_spi, clk_uart;
     logic clk_7seg;
     logic addr_dn, addr_up;
-    logic [95:0] key;
     logic Rst;
+    logic rst_in, rst_last;
 
     // Comment out for FPGA testing
 	logic [4:0] debug_input;
@@ -216,15 +215,8 @@ module rv_uart_top(
                       a4=8'b11101111, a5=8'b11011111,
                       a6=8'b10111111, a7=8'b01111111}
                       an_cur, an_nxt;
-	clk_div #(50000000) cdiv_7seg(clk,Rst,clk_7seg);
+	clk_div #(1000) cdiv_7seg(clk,Rst,clk_7seg);
     assign an = an_cur;
-
-
-    assign key[95:48]=48'h3cf3cf3cf3cf;
-    assign key[47:24]=24'h30c30c;
-    assign key[23:12]=12'hbae;
-    assign key[11:0]=12'h3cf;
-    logic rst_in, rst_last;
 
     //SPI
     logic spi_mosi, spi_miso, spi_cs, spi_sck;

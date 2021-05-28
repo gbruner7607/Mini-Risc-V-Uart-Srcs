@@ -26,8 +26,7 @@
 //Interface bus between all pipeline stages
 interface main_bus (
     input logic clk, Rst, debug, dbg, prog, mem_hold, uart_IRQ, RAS_rdy,//rx, //addr_dn, addr_up,
-    input logic[4:0] debug_input,
-    input logic [95:0] key
+    input logic[4:0] debug_input
 //    output logic tx
     );
 
@@ -219,7 +218,6 @@ interface main_bus (
         input MEM_WB_rd, WB_ID_rd,
         output EX_MEM_memwrite, EX_MEM_regwrite, EX_MEM_comp_res,
         output EX_MEM_pres_addr,
-        input key,
         input ID_EX_CSR_addr, ID_EX_CSR, ID_EX_CSR_write, csrsel, ID_EX_CSR_read,
         output EX_CSR_res, EX_CSR_addr, EX_CSR_write, EX_MEM_CSR, EX_MEM_CSR_read,
         input ID_EX_comp_sig
@@ -339,7 +337,7 @@ module RISCVcore_uart(
     end
 
 
-    main_bus bus(.key(rbus.key), .mem_hold(rbus.mem_hold), .uart_IRQ(rbus.uart_IRQ), .*);
+    main_bus bus(.mem_hold(rbus.mem_hold), .uart_IRQ(rbus.uart_IRQ), .*);
 
      assign rbus.storecntrl = bus.EX_MEM_storecntrl;
      assign rbus.trapping = bus.trapping;
