@@ -20,3 +20,7 @@ create_generated_clock -name clk_spi \
 create_generated_clock -name clk_uart \
     -source [get_ports clk] \
 	-divide_by 217 [get_pins cdiv_uart/clk_out]
+	
+
+# Fan-in & Fan-out Constraints
+set_max_fanout 5.0 [get_pins * -filter "@pin_direction == out"]
