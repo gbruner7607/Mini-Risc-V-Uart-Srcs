@@ -241,7 +241,7 @@ module rv_uart_top(
     riscv_bus rbus(.clk(clk_rv), .*);
     mmio_bus mbus(
         .clk(clk_spi), .Rst(Rst), .rx(rx),
-        .tx(tx), .BR_clk(clk_uart),
+        .debug_input(debug_input), .tx(tx), .BR_clk(clk_uart),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 

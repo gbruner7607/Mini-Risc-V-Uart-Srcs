@@ -423,8 +423,8 @@ assign bus.ecall = flush ? 1'b0 : (bus.ins == 32'b000000000000000000000000011100
         end
     end
         
-    assign ID_EX_memread=ID_EX_memread_sig;
-    assign ID_EX_regwrite=ID_EX_regwrite_sig;
+    assign bus.ID_EX_memread=ID_EX_memread_sig;
+    assign bus.ID_EX_regwrite=ID_EX_regwrite_sig;
    // assign ID_EX_rd=ID_EX_rd_sig;
     assign flush=flush_sig | bus.trigger_trap | bus.trap_ret;
     assign bus.IF_ID_jalr=IF_ID_jalr_sig;
