@@ -190,7 +190,7 @@ interface main_bus (
         input EX_MEM_memread, EX_MEM_regwrite, MEM_WB_regwrite, EX_MEM_alures,
         input EX_MEM_rd, IF_ID_dout_rs1, IF_ID_dout_rs2, 
         input IF_ID_CSR, trap, trigger_trap, RAS_rdy,
-        input ID_EX_memread, ID_EX_regwrite,
+        output ID_EX_memread, ID_EX_regwrite,
         output ID_EX_pres_addr, IF_ID_jalr, ID_EX_jalr, branch, IF_ID_jal,
         output IF_ID_rs1, IF_ID_rs2, IF_ID_rd,
         output ID_EX_dout_rs1, ID_EX_dout_rs2, branoff, hz,
