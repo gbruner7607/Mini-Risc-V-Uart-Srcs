@@ -1,4 +1,5 @@
 //Verilog HDL for "sram_logic", "write_driver_compiler" "functional"
+//Manu Rathore
 
 
 module write_driver_compiler ( BL, BLN, clk, data, write_en );

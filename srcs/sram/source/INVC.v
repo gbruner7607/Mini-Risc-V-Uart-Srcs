@@ -1,4 +1,5 @@
 //Verilog HDL for "sram_logic", "INVC" "functional"
+//Manu Rathore
 
 
 module INVC ( Y, A );

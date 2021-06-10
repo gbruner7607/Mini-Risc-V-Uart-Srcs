@@ -152,7 +152,7 @@ wire    sense_en_w = sense_en;
 wire [N_addr-1:0]   addr_w = addr[N_addr-1:0];
 wire [N_data-1:0]   din_w = data_in_reg[N_data-1:0];
 
-sram_compiled_array imem0 ( .dout7(dout[7]), .dout6(dout[6]),
+sram_4kb_256x128x8 imem0 ( .dout7(dout[7]), .dout6(dout[6]),
      .dout5(dout[5]), .dout4(dout[4]), .dout3(dout[3]),
      .dout2(dout[2]), .dout1(dout[1]), .dout0(dout[0]),
      .sense_en(sense_en_w), .write_en(write_en_w), .clk(clk_w),
@@ -163,7 +163,7 @@ sram_compiled_array imem0 ( .dout7(dout[7]), .dout6(dout[6]),
      .addr5(addr_w[5]), .addr4(addr_w[4]), .addr3(addr_w[3]),
      .addr2(addr_w[2]), .addr1(addr_w[1]), .addr0(addr_w[0]));
 
-sram_compiled_array imem1 ( .dout7(dout[15]), .dout6(dout[14]),
+sram_4kb_256x128x8 imem1 ( .dout7(dout[15]), .dout6(dout[14]),
      .dout5(dout[13]), .dout4(dout[12]), .dout3(dout[11]),
      .dout2(dout[10]), .dout1(dout[9]), .dout0(dout[8]),
      .sense_en(sense_en_w), .write_en(write_en_w), .clk(clk_w),
@@ -174,7 +174,7 @@ sram_compiled_array imem1 ( .dout7(dout[15]), .dout6(dout[14]),
      .addr5(addr_w[5]), .addr4(addr_w[4]), .addr3(addr_w[3]),
      .addr2(addr_w[2]), .addr1(addr_w[1]), .addr0(addr_w[0]));
 
-sram_compiled_array imem2 ( .dout7(dout[23]), .dout6(dout[22]),
+sram_4kb_256x128x8 imem2 ( .dout7(dout[23]), .dout6(dout[22]),
      .dout5(dout[21]), .dout4(dout[20]), .dout3(dout[19]),
      .dout2(dout[18]), .dout1(dout[17]), .dout0(dout[16]),
      .sense_en(sense_en_w), .write_en(write_en_w), .clk(clk_w),
@@ -185,7 +185,7 @@ sram_compiled_array imem2 ( .dout7(dout[23]), .dout6(dout[22]),
      .addr5(addr_w[5]), .addr4(addr_w[4]), .addr3(addr_w[3]),
      .addr2(addr_w[2]), .addr1(addr_w[1]), .addr0(addr_w[0]));
 
-sram_compiled_array imem3 ( .dout7(dout[31]), .dout6(dout[30]),
+sram_4kb_256x128x8 imem3 ( .dout7(dout[31]), .dout6(dout[30]),
      .dout5(dout[29]), .dout4(dout[28]), .dout3(dout[27]),
      .dout2(dout[26]), .dout1(dout[25]), .dout0(dout[24]),
      .sense_en(sense_en_w), .write_en(write_en_w), .clk(clk_w),

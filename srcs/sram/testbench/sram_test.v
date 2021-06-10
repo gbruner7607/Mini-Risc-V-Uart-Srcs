@@ -98,7 +98,7 @@ wire [7:0]   din_w = din[7:0];
 //wire    din_w[7] = din[7];
 
 
-sram_compiled_array SRAM_inst ( .dout7(dout[7]), .dout6(dout[6]),
+sram_4kb_256x128x8 SRAM_inst ( .dout7(dout[7]), .dout6(dout[6]),
      .dout5(dout[5]), .dout4(dout[4]), .dout3(dout[3]),
      .dout2(dout[2]), .dout1(dout[1]), .dout0(dout[0]),
      .sense_en(sense_en_w), .write_en(write_en_w), .clk(clk_w),

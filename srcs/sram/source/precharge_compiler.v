@@ -1,4 +1,5 @@
 //Verilog HDL for "sram_logic", "precharge_compiler" "functional"
+//Manu Rathore
 
 
 module precharge_compiler ( B, B_bar, clk );

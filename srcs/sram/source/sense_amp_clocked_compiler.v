@@ -1,4 +1,5 @@
 //Verilog HDL for "sram_logic", "sense_amp_clocked_compiler" "functional"
+//Manu Rathore
 
 
 module sense_amp_clocked_compiler ( sense, sense_b, bit, bit_bar, sense_en );

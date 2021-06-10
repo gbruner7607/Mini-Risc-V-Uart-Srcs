@@ -1,4 +1,5 @@
 //Verilog HDL for "sram_logic", "muxTrans" "functional"
+//Manu Rathore
 
 
 module muxTrans ( A, Y, S );
@@ -30,8 +31,8 @@ module muxTrans ( A, Y, S );
     end
   end
 */
-  assign dir = (sram_compiled_array.write_en && S);
-  assign not_dir = (!sram_compiled_array.write_en && S);
+  assign dir = (sram_4kb_256x128x8.write_en && S);
+  assign not_dir = (!sram_4kb_256x128x8.write_en && S);
   assign (supply1, supply0) A = dir ? A_int : 1'bz;
   assign (supply1, supply0) Y = not_dir ? Y_int : 1'bz;
 
