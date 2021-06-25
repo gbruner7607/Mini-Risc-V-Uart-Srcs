@@ -6,6 +6,7 @@ logic clk, Rst, clk_out;
 logic rx, tx;
 logic scan_en, scan_in, scan_out, scan_clk;
 logic miso, mosi, cs;
+logic rst_n;
 
 // Debug RISC-V Signals
 logic debug = 0;
@@ -18,6 +19,7 @@ rv_uart_top dut(.*);
 
 always #5 clk = !clk;
 assign scan_clk = clk;
+assign rst_n = ~Rst;
 
 task scan_bits(input logic[31:0] word, integer bit_length);
     for (int i = 0; i < bit_length; i++) begin
