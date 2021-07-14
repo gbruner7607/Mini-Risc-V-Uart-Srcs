@@ -47,6 +47,6 @@ module clk_div #(
         end
     end
 
-    assign clk_out = clk_sig;
+    assign clk_out = !clk_sig;
 endmodule
 

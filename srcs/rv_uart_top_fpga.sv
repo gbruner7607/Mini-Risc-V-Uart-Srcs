@@ -69,7 +69,7 @@ endinterface
 interface mmio_bus (
         input logic clk, Rst, rx,// uart_clk,
         input logic [4:0] debug_input,
-				input logic BR_clk,
+		input logic BR_clk,
         output logic tx,
         input logic spi_miso,
         output logic spi_mosi, spi_cs, spi_sck
@@ -240,8 +240,8 @@ module rv_uart_top(
 
     riscv_bus rbus(.clk(clk_rv), .*);
     mmio_bus mbus(
-        .clk(clk_spi), .Rst(Rst), .rx(rx),
-        .debug_input(debug_input), .tx(tx), .BR_clk(clk_uart),
+        .clk(clk_rv), .Rst(Rst), .rx(rx),
+        .debug_input(debug_input), .tx(tx), .BR_clk(clk),
         .spi_miso(spi_miso), .spi_mosi(spi_mosi),
         .spi_cs(spi_cs), .spi_sck(spi_sck));
 
